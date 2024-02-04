@@ -1,0 +1,60 @@
+{% include 'header.html' ignore missing %}
+{% import 'bootstrap/wtf.html' as wtf %}
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('{{ url_for('static', filename='assets/img/login-bg.jpg') }}')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="page-heading">
+                            {% if msg_sent: %}
+                                <h1>Successfully Registered</h1>
+                            {% else: %}
+                                <h1>Log in</h1>
+                            {% endif%}
+                            <span class="subheading">Welcome Back!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <main class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <p>Hey enter your details below to login.</p>
+                        <div class="my-5">
+                            {% with messages = get_flashed_messages() %}
+                              {% if messages %}
+                                <ul class="post-meta flashes">
+                                {% for message in messages %}
+                                  <li>{{ message }}</li>
+                                {% endfor %}
+                                </ul>
+                              {% endif %}
+                            {% endwith %}
+                            {% block body %}{% endblock %}
+                            <form action="{{ url_for('login') }}" method="POST" id="contactForm" data-sb-form-api-token="API_TOKEN">
+                                {{ form.hidden_tag() }}
+                                <div class="form-floating">
+                                    {{ form.email }} {{ form.email.label }}
+<!--                                    <input class="form-control" id="name" type="text" name="name" placeholder="Enter your name..." data-sb-validations="required" />-->
+<!--                                    <label for="name">Name</label>-->
+                                    <div class="invalid-feedback" data-sb-feedback="name:required">An email is required.</div>
+                                    <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                                </div>
+                                <div class="form-floating">
+                                    {{ form.password }} {{ form.password.label }}
+<!--                                    <input class="form-control" id="email" type="email" name="email" placeholder="Enter your email..." data-sb-validations="required,email" />-->
+<!--                                    <label for="email">Email address</label>-->
+                                    <div class="invalid-feedback" data-sb-feedback="email:required">A name is required.</div>
+                                </div>
+                                <br />
+                                <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">LET ME IN</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        {% include 'footer.html' ignore missing %}
