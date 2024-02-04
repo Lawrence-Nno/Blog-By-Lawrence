@@ -9,6 +9,7 @@ from database import Blogposts, Users, db, Comment
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 import hashlib
+import os
 
 
 login_manager = LoginManager()
@@ -16,7 +17,7 @@ app = Flask(__name__)
 Bootstrap(app)
 ckeditor = CKEditor(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///posts.db"
-app.secret_key = "Secret-Key"
+app.secret_key = os.environ["key"]
 db.init_app(app)
 login_manager.init_app(app)
 
@@ -213,5 +214,3 @@ def logout():
 if __name__ == '__main__':
     app.run(debug=True)
 
-# with app.app_context():
-#     db.create_all()
