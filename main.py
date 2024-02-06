@@ -19,7 +19,7 @@ Bootstrap(app)
 ckeditor = CKEditor(app)
 DATABASE_URL = os.environ['DATABASE_URL']
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL", "sqlite:///posts.db")
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL", "sqlite:///posts.db").replace('postgres://', 'postgresql://')
 app.secret_key = os.environ["key"]
 db.init_app(app)
 login_manager.init_app(app)
