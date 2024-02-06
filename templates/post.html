@@ -47,7 +47,7 @@
                         {{ wtf.quick_form(form, button_map={"submit":"primary"}) }}
                     </div>
                     {% for comment in comments %}
-                    <div class="comments">
+                    <div class="col-md-10 col-lg-8 col-xl-7 comments">
                         <div class="comments_poster">
                            <div class="commenter_image">
                                <img src="{{ gravatar_url(comment.comment_poster.email) }}"/>

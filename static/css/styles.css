@@ -10810,19 +10810,20 @@ header.masthead .post-heading .meta a {
 }
 
 .comments{
-    width: 60%;
-    background-color: #e6f2ff;
+    background-color: #f2f2f2;
     position: block;
     align: center;
     margin: 5px 0;
     border: 1px;
     border-style: solid;
-    border-color: #1a8cff;
+    border-color: #1a1a1a;
+    border-radius: 30px;
+    font-size: 1rem;
 }
 .comments_poster{
     font-weight: bold;
     font-style: italic;
-    color: #1a8cff;
+    color: #333333;
 }
 .commenter_image{
     margin: 2px 30px 2px 2px;
