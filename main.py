@@ -18,6 +18,8 @@ app = Flask(__name__)
 Bootstrap(app)
 ckeditor = CKEditor(app)
 DATABASE_URL = os.environ['DATABASE_URL']
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL", "sqlite:///posts.db").replace('postgres://', 'postgresql://')
 app.secret_key = os.environ["key"]
