@@ -10,13 +10,19 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 import hashlib
 import os
+import psycopg2
 
 
 login_manager = LoginManager()
 app = Flask(__name__)
 Bootstrap(app)
 ckeditor = CKEditor(app)
+DATABASE_URL = os.environ['DATABASE_URL']
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL", "sqlite:///posts.db")
+# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///posts.db"
 app.secret_key = os.environ["key"]
 db.init_app(app)
 login_manager.init_app(app)
