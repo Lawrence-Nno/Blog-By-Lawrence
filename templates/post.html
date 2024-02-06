@@ -51,7 +51,7 @@
                         <div class="comments_poster">
                            <div class="commenter_image">
                                <img src="{{ gravatar_url(comment.comment_poster.email) }}"/>
-                           </div> &nbsp; {{ comment.comment_poster.name }}:
+                           </div> {{ comment.comment_poster.name }}:
                         </div>
                         {{ comment.text | safe }}
                     </div>
