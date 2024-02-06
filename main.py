@@ -16,15 +16,13 @@ login_manager = LoginManager()
 app = Flask(__name__)
 Bootstrap(app)
 ckeditor = CKEditor(app)
-# Connect to DB
-# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///posts.db"
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL", "sqlite:///posts.db")
 app.secret_key = os.environ["key"]
 db.init_app(app)
 login_manager.init_app(app)
 
 
-def gravatar_url(email, size=40,rating='g',default='retro',force_default=False):
+def gravatar_url(email, size=50,rating='g',default='retro',force_default=False):
     hash_value = hashlib.md5((email.lower().encode('utf-8'))).hexdigest()
     return f"https://www.gravatar.com/avatar/{hash_value}?s={size}&d={default}&r={rating}&f={force_default}"
 
@@ -96,7 +94,7 @@ def edit_post(post_id):
         print(post_to_edit.title)
         post_to_edit.subtitle = form.subtitle.data
         post_to_edit.body = form.body.data
-        post_to_edit.author = form.author.data
+        # post_to_edit.author = form.author.data
         post_to_edit.img_url = form.img_url.data
         db.session.add(post_to_edit)
         db.session.commit()
