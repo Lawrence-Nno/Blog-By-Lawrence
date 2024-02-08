@@ -23,6 +23,7 @@
                             <table class="table users_table">
                                 <thead>
                                 <tr>
+                                    <th>No</th>
                                     <th>Name</th>
                                     <th>Email Address</th>
                                 </tr>
@@ -30,6 +31,7 @@
                                 {% for user in users: %}
                                 <tbody>
                                 <tr class="table-row">
+                                    <td>{{ user.id }}</td>
                                     <td>{{ user.name }}</td>
                                     <td>{{ user.email }}</td>
                                 </tr>
