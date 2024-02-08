@@ -10834,3 +10834,38 @@ header.masthead .post-heading .meta a {
 .commenter_image img{
     border-radius: 100%;
 }
+
+header.dashboard-div{
+    padding-top: 15px;
+    padding-bottom: 10px;
+    margin-bottom: 0;
+}
+
+div.my-5-adjust{
+    margin: 10px 0px; !important
+}
+
+
+div.form-floating-adjust{
+    width: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.px-4-adjust{
+    margin: 0 30px; !important
+}
+
+.edit{
+    font-size: 1rem;
+}
+
+.table{
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 50px;
+}
+tr:hover {background-color: #D6EEEE;}
+
+.table-row{
+    font-size: 1rem;
+}

@@ -4,7 +4,7 @@ from flask_login import LoginManager, login_user, login_required, logout_user, c
 from datetime import datetime
 from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
-from form import RegisterForm, LoginForm, PostForm, CommentForm
+from form import RegisterForm, LoginForm, PostForm, CommentForm, DashForm
 from database import Blogposts, Users, db, Comment
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
@@ -208,6 +208,35 @@ def login():
             flask.flash("Sorry, That email doesn't exist in our database.")
             return redirect(url_for('login'))
     return render_template('login.html', form=login_form, logged_in=current_user.is_authenticated)
+
+
+@app.route('/dashboard', methods=["GET", "POST"])
+@login_required
+def dashboard():
+    user_email = str(current_user.email).strip("'"","")")
+    user = db.session.execute(db.select(Users).where(Users.email == user_email)).scalar()
+    return render_template('dashboard.html', user=user, edit=False)
+
+
+@app.route('/edit-dashboard', methods=["GET", "POST"])
+@login_required
+def edit_dashboard():
+    user_email = str(current_user.email).strip("'"","")")
+    user = db.session.execute(db.select(Users).where(Users.email == user_email)).scalar()
+    dash_form = DashForm()
+    if dash_form.validate_on_submit():
+        user.name = dash_form.name.data
+        db.session.commit()
+        return redirect(url_for('home'))
+    return render_template('dashboard.html',  form=dash_form, user=user, edit=True)
+
+
+@app.route('/all_users')
+@login_required
+@admin_decorator
+def all_users():
+    users = db.session.execute(db.select(Users)).scalars()
+    return render_template('all_users.html', users=users)
 
 
 @app.route('/logout')

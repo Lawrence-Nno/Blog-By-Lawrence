@@ -1,0 +1,71 @@
+{% include 'header.html' ignore missing %}
+{% import 'bootstrap/wtf.html' as wtf %}
+        <!-- Page Header-->
+        <header class="masthead dashboard-div" style="background-image: url('{{ url_for('static', filename='assets/img/dashboard-bg.jpg') }}')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="page-heading">
+                            <h1 class="account-dashboard">All Users</h1>
+<!--                            <span class="subheading">View your account details below</span>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <main class="mb-4">
+            <div class="container px-4 px-lg-5 px-4-adjust">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+<!--                        <p>You can edit your name if you like</p>-->
+                        <div class="my-5-adjust">
+                            <table class="table users_table">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email Address</th>
+                                </tr>
+                                </thead>
+                                {% for user in users: %}
+                                <tbody>
+                                <tr class="table-row">
+                                    <td>{{ user.name }}</td>
+                                    <td>{{ user.email }}</td>
+                                </tr>
+                                </tbody>
+                                {% endfor %}
+                            </table>
+                            {% if edit: %}
+                            <form action="" method="POST" id="contactForm" data-sb-form-api-token="API_TOKEN">
+                                {{ form.hidden_tag() }}
+<!--                                <div class="form-floating form-floating-adjust">-->
+<!--                                    {{ form.email }} {{ form.email.label }}-->
+<!--&lt;!&ndash;                                    <input class="form-control" id="name" type="text" name="name" placeholder="Enter your name..." data-sb-validations="required" />&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <label for="name">Name</label>&ndash;&gt;-->
+<!--                                    <div class="invalid-feedback" data-sb-feedback="name:required">An email is required.</div>-->
+<!--                                    <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>-->
+<!--                                </div>-->
+<!--                                <div class="form-floating">-->
+<!--                                    {{ form.password }} {{ form.password.label }}-->
+<!--&lt;!&ndash;                                    <input class="form-control" id="email" type="email" name="email" placeholder="Enter your email..." data-sb-validations="required,email" />&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <label for="email">Email address</label>&ndash;&gt;-->
+<!--                                    <div class="invalid-feedback" data-sb-feedback="email:required">A name is required.</div>-->
+<!--                                </div>-->
+                                <div class="form-floating form-floating-adjust">
+                                    {{ form.name }} {{ form.name.label }}
+<!--                                    <input class="form-control" id="phone" type="tel" name="phone" placeholder="Enter your phone number..." data-sb-validations="required" />-->
+<!--                                    <label for="phone">Phone Number</label>-->
+                                    <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                                </div>
+<!--                                <a class="edit" href="">Edit</a>-->
+                                <br />
+                                <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">Submit</button>
+                            </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        {% include 'footer.html' ignore missing %}

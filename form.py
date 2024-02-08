@@ -29,3 +29,10 @@ class LoginForm(FlaskForm):
     email = StringField(label='Email Address', validators=[DataRequired()], render_kw={"class": "form-control", "placeholder": "Enter your email..."})
     password = PasswordField(label='Password', validators=[DataRequired()], render_kw={"class": "form-control", "placeholder": "Enter your password..."})
     submit = SubmitField(label='SUBMIT', render_kw={"class": "btn btn-primary text-uppercase"})
+
+
+class DashForm(FlaskForm):
+    email = StringField(label='Email Address', render_kw={"class": "form-control", "placeholder": "Enter your email..."})
+    password = PasswordField(label='Password')
+    name = StringField(label='Name', validators=[DataRequired()], render_kw={"class": "form-control", "placeholder": "Enter your name..."})
+    submit = SubmitField(label='SUBMIT', render_kw={"class": "btn btn-primary text-uppercase"})
